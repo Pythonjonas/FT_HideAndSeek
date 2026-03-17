@@ -49,3 +49,18 @@ void AFT_HideAndSeekCharacter::Tick(float DeltaSeconds)
 {
     Super::Tick(DeltaSeconds);
 }
+
+void AFT_HideAndSeekCharacter::BeginPlay()
+{
+	Super::BeginPlay();
+
+	// check if we are controlled by the player or if an AI should posess this character
+	if(IsPlayerControlled())
+	{
+		UE_LOG(LogTemp, Warning, TEXT("Player is controlling this character"));
+	}
+	else
+	{
+		UE_LOG(LogTemp, Warning, TEXT("Skynet Deployed, kill John Conner"));
+	}
+}
