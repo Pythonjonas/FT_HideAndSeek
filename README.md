@@ -8,7 +8,7 @@ An interesting view on this is the [OpenAI Agent-based approach, and the glitche
 
 ## Overview
 Controls:
-Click and the player will mve to the click
+Click, and the player will move to the click position if possible
 
 # Where to find the relevant scripts
 In the C++ Classes->Public->StalkerAIController
@@ -19,7 +19,7 @@ I have made a separate Blueprint for the AI in Top Down->Blueprints->BP_TopDownA
 - Try to add feedback to the player on what the AI is doing
 
 # Changes from base project
-You will notice that both AI and Player are actually driven by the same script! This is because the character script handles movement, and the input comes from the IMC or an AI controller. So only minor changes were made to have an AI take control. This is overall good coding practice; you see this in how [easy modders can take control of enemies in games.](https://www.youtube.com/watch?v=8yCiUW1v58Q)
+You will notice that both AI and Player are actually driven by the same script! This is because the character script handles movement, and the input comes from the IMC or an AI controller. So only minor changes were made to have an AI take control. This is overall good coding practice; you see it in how [easy modders can take control of enemies in games.](https://www.youtube.com/watch?v=8yCiUW1v58Q)
 
 # Challenges
 Tes your might
