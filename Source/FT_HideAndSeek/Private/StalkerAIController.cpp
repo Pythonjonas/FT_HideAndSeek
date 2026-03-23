@@ -21,15 +21,41 @@ void AStalkerAIController::Tick(float DeltaTime)
 			// probably have a func for this
 			Target = FVector(FMath::RandRange(100, 2800), FMath::RandRange(100, 3200), FMath::RandRange(50, 250));
 			MoveToLocation(Target);
+			
 		}
+
+		if (FVector::Dist(GetPawn()->GetActorLocation(), Target) < 1000.0f || FVector::Dist(GetPawn()->GetActorLocation(), Target) > 100.0f)
+		{
+			UE_LOG(LogTemp, Warning, TEXT("HUNT"));
+			bIsStalkingPlayer = true;
+		}
+		else if (FVector::Dist(GetPawn()->GetActorLocation(), Target) < 100.0f)
+		{
+			UE_LOG(LogTemp, Warning, TEXT("CHASING"));
+
+		}
+
 	}
 	else
 	{
 		if(Player)
 		{
 			MoveToActor(Player);
+			if (FVector::Dist(GetPawn()->GetActorLocation(), Player->GetActorLocation()) > 1000.0f)
+			{
+				UE_LOG(LogTemp, Warning, TEXT("IDLE"));
+				bIsStalkingPlayer = false;
+			}
 		}
+		else
+		{
+			Player = GetWorld()->GetFirstPlayerController()->GetPawn();
+			UE_LOG(LogTemp, Warning, TEXT("Player is null"));
+		}
+
+
 	}
+	//UE_LOG(LogTemp, Warning, TEXT("Im chasing you."))
 	
 }
 
@@ -38,18 +64,18 @@ void AStalkerAIController::BeginPlay()
 	Super::BeginPlay();
 	// set up the AI, like finding the player and setting it as a target
 	// or set up a patrol route for the AI to follow
-
+	Cast<ACharacter>(GetPawn())->GetCharacterMovement()->MaxWalkSpeed = 100.0f; // 200 cm
 	// lets set a random target for the AI to move towards, just for testing purposes
 	if(bIsStalkingPlayer)
 	{
 		Player = GetWorld()->GetFirstPlayerController()->GetPawn();
 		if(Player)
 		{
-			UE_LOG(LogTemp, Warning, TEXT("AI has started and is stalking the player"));
+			//UE_LOG(LogTemp, Warning, TEXT("Im chasing you."));
 		}
 		else
 		{
-			UE_LOG(LogTemp, Warning, TEXT("AI has started but could not find the player"));
+			//UE_LOG(LogTemp, Warning, TEXT("I cant find you."));
 		}
 	}
 	else

@@ -7,7 +7,7 @@
 #include "StalkerAIController.generated.h"
 
 /**
- * 
+ *
  */
 UCLASS()
 class FT_HIDEANDSEEK_API AStalkerAIController : public AAIController
